@@ -7,6 +7,7 @@ using Azure.Security.KeyVault;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Core;
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace EpamLabKZ22WebApp4.Controllers
 {
@@ -53,10 +54,15 @@ namespace EpamLabKZ22WebApp4.Controllers
 
         private string GetConnectionString()
         {
-            string result = "-";
+            string result="-";
             try
             {
-                result = ConfigRoot.GetConnectionString("DefaultConnectionString") ?? "empty";
+                string? result1 = null;
+                string? result2 = null;
+                result1 = ConfigRoot.GetConnectionString("DevSecretConnectionString");
+                result2 = ConfigRoot.GetConnectionString("DefaultConnectionString");
+                if (!result1.IsNullOrEmpty()) result = result1 ?? "empty1";
+                else result = result2 ?? "empty1"; 
             }
             catch (Exception ex)
             {
