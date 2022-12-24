@@ -12,14 +12,15 @@
         <p> Name = @ViewData["DBMessageName"] </p>
         <p> Info = @ViewData["DBMessageInfo"] </p>
     </div>
-     <div>
+    <div>
         <h2>The secret key from Azure:</h2>
         <p>The secret key (AlekseiKhoroshevNumber1) = @ViewData["SecretKeyFromAzure"] </p>
         <p>The secret = @ViewData["SecretFromAzure"] </p>
-    </div>    
+        <p>EpamLabTestVar = @ViewData["AzureEpamLabTestVar"] </p>
+    </div>
     <div>
         <h2>Connect to DB:</h2>
         <p>ConnectionString = @ViewData["ConnectionString"] </p>
         <p>Error = @ViewData["DBError"] </p>
-    </div>   
+    </div>
 </div>

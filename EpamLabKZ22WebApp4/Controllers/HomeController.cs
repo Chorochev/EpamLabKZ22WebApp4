@@ -6,6 +6,7 @@ using Azure.Identity;
 using Azure.Security.KeyVault;
 using Azure.Security.KeyVault.Secrets;
 using Azure.Core;
+using Microsoft.Extensions.Configuration;
 
 namespace EpamLabKZ22WebApp4.Controllers
 {
@@ -29,6 +30,7 @@ namespace EpamLabKZ22WebApp4.Controllers
         {
             ViewData["SecretKeyFromAzure"] = GetSecretKeyFromAzure();
             ViewData["SecretFromAzure"] = GetSecretFromAzure();
+            ViewData["AzureEpamLabTestVar"] = GetAzureEpamLabTestVar();
             string _connectionString = GetConnectionString();
             ViewData["ConnectionString"] = _connectionString;
             try
@@ -88,6 +90,20 @@ namespace EpamLabKZ22WebApp4.Controllers
                 var client = new SecretClient(azureKyeVaultLink, new DefaultAzureCredential());
                 KeyVaultSecret secret = client.GetSecret("SecretVault1");
                 string secretValue = secret.Value;
+                return secretValue;
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        //epamlabtestvar
+        private string GetAzureEpamLabTestVar()
+        {
+            try
+            {               
+                string secretValue = ConfigRoot.GetValue<string>("epamlabtestvar", "not found!!!");
                 return secretValue;
             }
             catch (Exception ex)
