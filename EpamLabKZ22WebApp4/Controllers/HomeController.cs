@@ -28,7 +28,7 @@ namespace EpamLabKZ22WebApp4.Controllers
         public IActionResult Privacy()
         {
             ViewData["SecretKeyFromAzure"] = GetSecretKeyFromAzure();
-            ViewData["SecretSecretFromAzure"] = GetSecretSecretFromAzure();
+            ViewData["SecretFromAzure"] = GetSecretFromAzure();
             string _connectionString = GetConnectionString();
             ViewData["ConnectionString"] = _connectionString;
             try
@@ -63,13 +63,16 @@ namespace EpamLabKZ22WebApp4.Controllers
             return result;
         }
 
+
         private string GetSecretKeyFromAzure()
         {
-            try { 
-            var client = new SecretClient(new Uri("https://epamlabkz2022keyvault.vault.azure.net/"), new DefaultAzureCredential());
-            KeyVaultSecret secret = client.GetSecret("SecretKeyVault1");
-            string secretValue = secret.Value;
-            return secretValue;
+            try
+            {
+                Uri azureKyeVaultLink = new Uri(ConfigRoot.GetValue<string>("ApiSettings:AzureKyeVaultLink"));
+                var client = new SecretClient(azureKyeVaultLink, new DefaultAzureCredential());
+                KeyVaultSecret secret = client.GetSecret("AlekseiKhoroshevNumber1");
+                string secretValue = secret.Value;
+                return secretValue;
             }
             catch (Exception ex)
             {
@@ -77,11 +80,12 @@ namespace EpamLabKZ22WebApp4.Controllers
             }
         }
 
-        private string GetSecretSecretFromAzure()
+        private string GetSecretFromAzure()
         {
             try
             {
-                var client = new SecretClient(new Uri("https://epamlabkz2022keyvault.vault.azure.net/"), new DefaultAzureCredential());
+                Uri azureKyeVaultLink = new Uri(ConfigRoot.GetValue<string>("ApiSettings:AzureKyeVaultLink"));
+                var client = new SecretClient(azureKyeVaultLink, new DefaultAzureCredential());
                 KeyVaultSecret secret = client.GetSecret("SecretVault1");
                 string secretValue = secret.Value;
                 return secretValue;
