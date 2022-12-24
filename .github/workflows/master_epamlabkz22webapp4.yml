@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'EpamLabKZ22WebApp4'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_60BFB89132834268B2D113190C80AEEA }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_7FCCE82CA59B497F9A5125B3221B0CDA }}
           package: .
