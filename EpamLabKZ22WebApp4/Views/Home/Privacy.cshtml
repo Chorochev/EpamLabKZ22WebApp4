@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+<p>Use this page to detail your site's privacy policy.</p>
+
+<div class="row">
+    <div>
+        <h2>Epam Lab 2022</h2>
+        <p> ID = @ViewData["DBMessageID"] </p>
+        <p> Name = @ViewData["DBMessageName"] </p>
+        <p> Info = @ViewData["DBMessageInfo"] </p>
+    </div>
+     <div>
+        <h2>The secret key from Azure:</h2>
+        <p>The secret key @ViewData["SecretKeyFromAzure"] </p>
+        <p>The secret @ViewData["SecretSecretFromAzure"] </p>
+    </div>    
+    <div>
+        <h2>Connect to DB:</h2>
+        <p>ConnectionString = @ViewData["ConnectionString"] </p>
+        <p>Error = @ViewData["DBError"] </p>
+    </div>   
+</div>
