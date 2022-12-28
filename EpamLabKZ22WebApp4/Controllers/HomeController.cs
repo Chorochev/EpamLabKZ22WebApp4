@@ -59,20 +59,19 @@ namespace EpamLabKZ22WebApp4.Controllers
 
             try
             {
-                result[0] = ConfigRoot.GetConnectionString("DevSecretConnectionString") ?? "null";               
+                result[0] = ConfigRoot.GetConnectionString("DevSecretConnectionString") ?? "null";
+                if (result[0] != "null") result[4] = "1";
             }
             catch (Exception ex)
             {
                 result[1] = "DevSecretConnectionString - ERROR: " + ex.ToString();
-                result[4] = "1";
+                result[4] = "2";
             }
-
-            if (result[0] != "null") return result;
 
             try
             {
                 result[2] = ConfigRoot.GetConnectionString("DefaultConnectionString") ?? "null";
-                result[4] = "2";
+                if (result[4] != "1") result[4] = "2";
             }
             catch (Exception ex)
             {
