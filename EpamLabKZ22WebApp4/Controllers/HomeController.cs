@@ -32,8 +32,9 @@ namespace EpamLabKZ22WebApp4.Controllers
             ViewData["SecretKeyFromAzure"] = GetSecretKeyFromAzure();
             ViewData["SecretFromAzure"] = GetSecretFromAzure();
             ViewData["AzureEpamLabTestVar"] = GetAzureEpamLabTestVar();
-            string _connectionString = GetConnectionString();
-            ViewData["ConnectionString"] = _connectionString;
+            var dataconnect = GetConnectionString();
+            ViewData["dataconnect"] = dataconnect;
+            var _connectionString = dataconnect[4] == "0" ? dataconnect[0] : dataconnect[2];
             try
             {
                 EpamLabTestDbContext dBEntities = new EpamLabTestDbContext(_connectionString);
@@ -52,25 +53,31 @@ namespace EpamLabKZ22WebApp4.Controllers
             return View();
         }
 
-        private string GetConnectionString()
-        {
-            string result="-";
+        private string[] GetConnectionString()
+        {           
+            var result = new string[] { "connect1", "error1", "connect2", "error2", "0" };
+
             try
             {
-                string? result1 = null;
-                string? result2 = null;
-                result1 = ConfigRoot.GetConnectionString("DevSecretConnectionString");
-                result2 = ConfigRoot.GetConnectionString("DefaultConnectionString");
-                if (!result1.IsNullOrEmpty()) result = result1 ?? "empty1";
-                else result = result2 ?? "empty1"; 
+                result[0] = ConfigRoot.GetConnectionString("DevSecretConnectionString") ?? "null";               
             }
             catch (Exception ex)
             {
-                result = ex.ToString();
+                result[1] = "DevSecretConnectionString - ERROR: " + ex.ToString();
+                result[0] = "1";
             }
+
+            try
+            {
+                result[2] = ConfigRoot.GetConnectionString("DefaultConnectionString") ?? "null";
+            }
+            catch (Exception ex)
+            {
+                result[3] = "DefaultConnectionString - ERROR: " + ex.ToString();
+            }
+
             return result;
         }
-
 
         private string GetSecretKeyFromAzure()
         {
