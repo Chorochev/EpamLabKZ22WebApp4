@@ -67,6 +67,8 @@ namespace EpamLabKZ22WebApp4.Controllers
                 result[4] = "1";
             }
 
+            if (result[0] != "null") return result;
+
             try
             {
                 result[2] = ConfigRoot.GetConnectionString("DefaultConnectionString") ?? "null";
