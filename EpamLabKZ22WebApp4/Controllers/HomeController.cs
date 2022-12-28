@@ -34,7 +34,7 @@ namespace EpamLabKZ22WebApp4.Controllers
             ViewData["AzureEpamLabTestVar"] = GetAzureEpamLabTestVar();
             var dataconnect = GetConnectionString();
             ViewData["dataconnect"] = dataconnect;
-            var _connectionString = dataconnect[4] == "0" ? dataconnect[0] : dataconnect[2];
+            var _connectionString = dataconnect[4] == "1" ? dataconnect[0] : dataconnect[2];
             try
             {
                 EpamLabTestDbContext dBEntities = new EpamLabTestDbContext(_connectionString);
@@ -55,7 +55,7 @@ namespace EpamLabKZ22WebApp4.Controllers
 
         private string[] GetConnectionString()
         {           
-            var result = new string[] { "connect1", "error1", "connect2", "error2", "0" };
+            var result = new string[] { "connect1", "-", "connect2", "-", "0" };
 
             try
             {
@@ -64,12 +64,13 @@ namespace EpamLabKZ22WebApp4.Controllers
             catch (Exception ex)
             {
                 result[1] = "DevSecretConnectionString - ERROR: " + ex.ToString();
-                result[0] = "1";
+                result[4] = "1";
             }
 
             try
             {
                 result[2] = ConfigRoot.GetConnectionString("DefaultConnectionString") ?? "null";
+                result[4] = "2";
             }
             catch (Exception ex)
             {
