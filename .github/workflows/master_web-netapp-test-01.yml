@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'web-netapp-test-01'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_A323D13CA16E4F23A4F53889C21AC5B6 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4FF8B1BF2BA543F9B3EDDEBF906A6B3A }}
           package: .
