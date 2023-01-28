@@ -29,8 +29,8 @@ namespace EpamLabKZ22WebApp4.Controllers
 
         public IActionResult Privacy()
         {
-            ViewData["SecretKeyFromAzure"] = GetSecretKeyFromAzure();
-            ViewData["SecretFromAzure"] = GetSecretFromAzure();
+            //ViewData["SecretKeyFromAzure"] = GetSecretKeyFromAzure();
+            //ViewData["SecretFromAzure"] = GetSecretFromAzure();
             ViewData["AzureEpamLabTestVar"] = GetAzureEpamLabTestVar();
             var dataconnect = GetConnectionString();
             ViewData["dataconnect"] = dataconnect;
