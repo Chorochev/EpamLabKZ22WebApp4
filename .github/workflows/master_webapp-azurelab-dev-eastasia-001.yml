@@ -53,5 +53,5 @@ jobs:
         with:
           app-name: 'webapp-azurelab-dev-eastasia-001'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_6340459B5B214481A06F30B5DF0B32B8 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_496B41420ADD4D1BA30E15FA26184BC5 }}
           package: .
